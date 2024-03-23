@@ -19,5 +19,5 @@ from django.urls import path
 from wiki import views
 
 urlpatterns = [
-    path('wiki/', views.FirstParagraph.as_view()),
+    path('wiki/<query>', views.FirstParagraph.as_view()),
 ]

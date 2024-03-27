@@ -10,12 +10,12 @@
 ### how to start
 ```
 pip install -r requirements.txt
-python simple_api/manage.py test
-python simple_api/manage.py runserver localhost:80
+python simple_api/manage.py test wiki
+python simple_api/manage.py runserver localhost:8000
 ```
 ### how to use
 ```
-curl -H "Accept-Language: en" -w ", %{http_code}\n" http://localhost/wiki/rum 
+curl -H "Accept-Language: en" -w ", %{http_code}\n" http://localhost:8000/wiki/rum 
 ```
 - result:
 ```

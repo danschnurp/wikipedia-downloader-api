@@ -31,7 +31,7 @@ class TestCS(TestCase):
 
     def testCharles(self):
         response = self.client.get('/wiki/Karel%20IV')
-        self.assertEqual(response.status_code, status.HTTP_303_SEE_OTHER)
+        self.assertEqual(response.status_code, status.HTTP_300_MULTIPLE_CHOICES)
         self.assertEqual(response.data["result"][:50], "Karel IV. (14. května 1316, Praha – 29. listopadu ")
 
 

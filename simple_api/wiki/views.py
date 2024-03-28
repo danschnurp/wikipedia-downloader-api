@@ -103,7 +103,9 @@ class FirstParagraph(APIView):
             return Response(data={"result": f"{result}"}, status=status.HTTP_200_OK)
 
         result = get_data_from_search(query, site=f"https://{lang}.wikipedia.org/")
-        if result is not None:
-            return Response(data={"result": f"{result}"}, status=status.HTTP_303_SEE_OTHER)
+        if type(result) is str:
+            return Response(data={"result": f"{result}"}, status=status.HTTP_300_MULTIPLE_CHOICES)
+        elif result is not None:
+            return Response(data={"result": "null", "articles": f"{result}"}, status=status.HTTP_303_SEE_OTHER)
 
         return Response(data={"result": "null"}, status=status.HTTP_404_NOT_FOUND)

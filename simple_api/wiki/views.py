@@ -44,7 +44,7 @@ def get_data_from_wiki(prompt="rum", site=f"https://cs.wikipedia.org/wiki/") -> 
         return find_paragraph(result)
 
 
-def get_data_from_search(prompt: str, site=f"https://cs.wikipedia.org") -> str | None:
+def get_data_from_search(prompt: str, site=f"https://cs.wikipedia.org") -> list | str | None:
     """
     This function takes a search prompt and retrieves data from a specified website, returning the found information or None
     if no results are found.
@@ -64,12 +64,12 @@ def get_data_from_search(prompt: str, site=f"https://cs.wikipedia.org") -> str |
     if found is not None:
         return found
     # gets first possible result
-    result = bs4.BeautifulSoup(result.text, features='html.parser').find("div", "mw-search-results-container")
+    result = bs4.BeautifulSoup(result.text, features='html.parser').find("ul", "mw-search-results")
     if result is None:
         return None
-    # gets href of the first result
-    result = result.find("a").attrs["href"]
-    return get_data_from_wiki(result, site)
+    # gets hrefs of the results
+    result = result.find_all("a")
+    return list(set(site[:-1] + i.attrs["href"] for i in result))
 
 
 class FirstParagraph(APIView):

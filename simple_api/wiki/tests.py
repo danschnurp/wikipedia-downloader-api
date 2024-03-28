@@ -19,7 +19,7 @@ class TestCS(TestCase):
     def testRumInsideString(self):
         response = self.client.get('/wiki/RumbEllion')
         self.assertEqual(response.status_code, status.HTTP_303_SEE_OTHER)
-        self.assertEqual(response.data["result"][:50], "Rum je alkoholický nápoj destilovaný z melasy nebo")
+
 
     def testNonsense(self):
         response = self.client.get('/wiki/abcdedfgh')
